@@ -15,9 +15,13 @@ class Login extends Component {
         };
 
         this.handleEmailChange = this.handleEmailChange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
 
+    }
+    handleChange(event){
+        this.setState({ [event.target.name]: event.target.value})
     }
 
     handleEmailChange(event) {
@@ -37,7 +41,7 @@ class Login extends Component {
         }
         console.log("body: " + this.state.email + " " + this.state.password)
 
-        axios.post('http://localhost:8000/auth/users/', body)
+        axios.post('http://localhost:8000/auth/token/login', body)
             .then(function (response) {
                 self.setState({ isLoader: false });
                 self.setState({status: 'success'})
@@ -67,10 +71,10 @@ class Login extends Component {
                     <h1 className="login_heading">Login</h1>
                     <form onSubmit={this.handleSubmit}>
                         <div className="form-group">
-                            <input type="email" onChange={this.handleEmailChange} placeholder="Email address" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                            <input type="email" name="email" onChange={this.handleChange} placeholder="Email address" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
                         </div>
                         <div className="form-group">
-                            <input type="password" placeholder="Password" onChange={this.handlePasswordChange} className="form-control" id="exampleInputPassword1" />
+                            <input type="password" name="password" placeholder="Password" onChange={this.handleChange} className="form-control" id="exampleInputPassword1" />
                         </div>
                         
                         <button type="submit" className="btn btn-default">Submit</button>

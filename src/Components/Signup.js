@@ -19,37 +19,14 @@ class Signup extends Component {
             status: ''
         };
 
-        this.handleUsernameChange = this.handleUsernameChange.bind(this);
-        this.handlePhoneNumberChange = this.handlePhoneNumberChange.bind(this);
-        this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
-        this.handleLastNameChange = this.handleLastNameChange.bind(this);
-        this.handleEmailChange = this.handleEmailChange.bind(this);
-        this.handlePasswordChange = this.handlePasswordChange.bind(this);
-        this.handleRePasswordChange =this.handleRePasswordChange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
 
     }
 
-    handleUsernameChange(event) {
-        this.setState({ username: event.target.value });
-    }
-    handlePhoneNumberChange(event) {
-        this.setState({ phone_number: event.target.value });
-    }
-    handleFirstNameChange(event) {
-        this.setState({ first_name: event.target.value });
-    }
-    handleLastNameChange(event) {
-        this.setState({ last_name: event.target.value });
-    }
-    handleEmailChange(event) {
-        this.setState({ email: event.target.value });
-    }
-    handlePasswordChange(event) {
-        this.setState({ password: event.target.value });
-    }
-    handleRePasswordChange(event) {
-        this.setState({ re_password: event.target.value });
+   
+    handleChange(event) {
+        this.setState({ [event.target.name]: event.target.value });
     }
 
     handleSubmit(event) {
@@ -97,25 +74,25 @@ class Signup extends Component {
                     <h1 className="login_heading">Signup</h1>
                     <form onSubmit={this.handleSubmit}>
                         <div className="form-group">
-                            <input type="text" onChange={this.handleUsernameChange} placeholder="Username" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                            <input type="text" name = "username" onChange={this.handleChange} placeholder="Username" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
                         </div>
                         <div className="form-group">
-                            <input type="number" onChange={this.handlePhoneNumberChange} placeholder="Phone Number" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                            <input type="number" name = "phone_number" onChange={this.handleChange} placeholder="Phone Number" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
                         </div>
                         <div className="form-group">
-                            <input type="text" onChange={this.handleFirstNameChange} placeholder="First Name" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                            <input type="text" name = "first_name" onChange={this.handleChange} placeholder="First Name" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
                         </div>
                         <div className="form-group">
-                            <input type="text" onChange={this.handleLastNameChange} placeholder="Last Name" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                            <input type="text" name = "last_name" onChange={this.handleChange} placeholder="Last Name" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
                         </div>
                         <div className="form-group">
-                            <input type="email" onChange={this.handleEmailChange} placeholder="Email Address" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                            <input type="email" name = "email" onChange={this.handleChange} placeholder="Email Address" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
                         </div>
                         <div className="form-group">
-                            <input type="password" placeholder="Password" onChange={this.handlePasswordChange} className="form-control" id="exampleInputPassword1" />
+                            <input type="password" name = "password" placeholder="Password" onChange={this.handleChange} className="form-control" id="exampleInputPassword1" />
                         </div>
                         <div className="form-group">
-                            <input type="password" placeholder="Re-Password" onChange={this.handleRePasswordChange} className="form-control" id="exampleInputPassword1" />
+                            <input type="password" name = "re_password" placeholder="Re-Password" onChange={this.handleChange} className="form-control" id="exampleInputPassword1" />
                         </div>
                         
                         <button type="submit" className="btn btn-default">Submit</button>

@@ -6,13 +6,52 @@
   height: 40vmin;
   pointer-events: none;
 }
+.login_heading{
+  font-family: 'Times New Roman', Times, serif;
+  color: aqua;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
 }
+.container{
+  width: 30% !important;
+  margin-top: 5%;
+  padding-top: 2%;
+  padding-right: 5%;
+  padding-bottom: 3%;
+  border-style: solid;
+  border-color: #013e4b;
+  background-color: #007f9a;
+  
+}
+.login_heading{
+  color:white
+}
+.status{
+  padding-top: 5%;
+  color: #f3f3f3;
+}
+.btn-default{
+  background-color:white !important
+}
+.loader {
+  border: 8px solid #f3f3f3; /* Light grey */
+  border-top: 8px solid #007f9a; /* Blue */
+  border-radius: 50%;
+  margin: auto;
+  margin-top: 10%;
+  width: 30px;
+  height: 30px;
+  animation: spin 2s linear infinite;
+}
 
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

@@ -13,22 +13,12 @@ class Login extends Component {
             isLoader: false,
             status: ''
         };
-
-        this.handleEmailChange = this.handleEmailChange.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        this.handlePasswordChange = this.handlePasswordChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
 
     }
     handleChange(event){
         this.setState({ [event.target.name]: event.target.value})
-    }
-
-    handleEmailChange(event) {
-        this.setState({ email: event.target.value });
-    }
-    handlePasswordChange(event) {
-        this.setState({ password: event.target.value });
     }
 
     handleSubmit(event) {

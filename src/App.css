@@ -2,6 +2,7 @@
   text-align: center;
 }
 
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -16,6 +17,10 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+
+.heading{
+  font-family: 'Times New Roman', Times, serif;
+}
 .container{
   width: 30% !important;
   margin-top: 5%;
@@ -23,16 +28,20 @@
   padding-right: 5%;
   padding-bottom: 3%;
   border-style: solid;
-  border-color: #013e4b;
-  background-color: #007f9a;
+  border-color: #4B0082;
+  background-color: #ffffff;
   
 }
 .login_heading{
   color:white
 }
-.status{
+.status_success{
   padding-top: 5%;
-  color: #f3f3f3;
+  color: #28a303;
+}
+.status_failed{
+  padding-top: 5%;
+  color: #6e0000;
 }
 .btn-default{
   background-color:white !important

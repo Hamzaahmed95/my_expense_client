@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { Form, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import '../App.css'
-import {connect} from 'react-redux';
-import {userLoginFetch} from '../actions/users';
+import { connect } from 'react-redux';
+import {Button,TextField} from '@material-ui/core';
+import { userLoginFetch } from '../actions/users';
+import PropTypes from 'prop-types';
+import logo from '../logo.png';
 
 class Login extends Component {
 
@@ -19,8 +22,11 @@ class Login extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
 
     }
-    handleChange(event){
-        this.setState({ [event.target.name]: event.target.value})
+    static propTypes = {
+        currentUser: PropTypes.array.isRequired
+    }
+    handleChange(event) {
+        this.setState({ [event.target.name]: event.target.value })
     }
 
     handleSubmit(event) {
@@ -32,47 +38,31 @@ class Login extends Component {
             "password": this.state.password
         }
         this.props.userLoginFetch(body)
-        console.log("body: " + this.state.email + " " + this.state.password)
-
-        // axios.post('http://localhost:8000/auth/token/login', body)
-        //     .then(function (response) {
-        //         self.setState({ isLoader: false });
-        //         self.setState({status: 'success'})
-        //         // handle success
-        //         console.log(response.data.auth_token);
-        //     })
-        //     .catch(function (error) {
-        //         self.setState({ isLoader: false });
-        //         self.setState({status: 'failed'})
-        //         // handle error
-        //         console.log(error);
-        //     })
-        //     .finally(function () {
-                
-        //         // always executed
-        //     });
 
         event.preventDefault();
     }
 
-
+    
+   
     render() {
         return (
             <div className="App">
 
                 <div className="container">
-                    <h1 className="login_heading">Login</h1>
+                    <img src={logo} width={75} height={75}/>
+                    <h3 className="heading"> CV MAKER</h3>
                     <form onSubmit={this.handleSubmit}>
                         <div className="form-group">
-                            <input type="email" name="email" onChange={this.handleChange} placeholder="Email address" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                            <TextField color='primary' required ={true} fullWidth={true} type="email" name="email" onChange={this.handleChange} id="standard-basic" label="Email" />
                         </div>
                         <div className="form-group">
-                            <input type="password" name="password" placeholder="Password" onChange={this.handleChange} className="form-control" id="exampleInputPassword1" />
+                            <TextField type="password" required ={true} fullWidth={true} name="password" id="standard-basic" label="Password" onChange={this.handleChange} />
+
                         </div>
-                        
-                        <button type="submit" className="btn btn-default">Submit</button>
-                        {/* {this.state.isLoader? <div className="loader"></div>:''}
-                        <div className="status">{this.state.status}</div> */}
+                    
+                        <Button variant="contained"  type="submit" color="primary">Login</Button>
+                        <div className={'status_' + this.props.status}>{this.props.status}</div>
+
                     </form>
 
                 </div>
@@ -81,9 +71,20 @@ class Login extends Component {
     }
 
 }
+
+const styles = theme => ({
+  notchedOutline: {
+    borderWidth: "1px",
+    borderColor: "yellow !important"
+  }
+});
 const mapDispatchToProps = dispatch => ({
-    userLoginFetch: userInfo => dispatch(userLoginFetch(userInfo))
-  })
-  
-export default connect(null, mapDispatchToProps)(Login);
+    userLoginFetch: userInfo => dispatch(userLoginFetch(userInfo)),
+   
+})
+const mapStateToProps = state => ({
+    status: state.user.status
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(Login);
 

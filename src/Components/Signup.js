@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import axios from 'axios'
-import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { userRegisterAPI } from '../actions/users';
+import {Button,TextField} from '@material-ui/core';
+import { connect } from 'react-redux';
+import logo from '../logo.png';
 import '../App.css'
 
 class Signup extends Component {
@@ -15,8 +17,6 @@ class Signup extends Component {
             email: '',
             password: '',
             re_password: '',
-            isLoader: false,
-            status: ''
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -43,24 +43,8 @@ class Signup extends Component {
             "re_password": this.state.re_password
         }
         console.log(body.username+" "+body.phone+" "+body.first_name+" "+body.last_name+" "+body.email+" "+body.password+" "+body.re_password)
-
-        axios.post('http://localhost:8000/auth/users/', body)
-            .then(function (response) {
-                self.setState({ isLoader: false });
-                self.setState({status: 'success'})
-                // handle success
-                console.log(response.data);
-            })
-            .catch(function (error) {
-                self.setState({ isLoader: false });
-                self.setState({status: 'failed'})
-                // handle error
-                console.log(error);
-            })
-            .finally(function () {
-                
-                // always executed
-            });
+        this.props.userRegisterAPI(body)
+        
 
         event.preventDefault();
     }
@@ -71,33 +55,33 @@ class Signup extends Component {
             <div className="App">
 
                 <div className="container">
-                    <h1 className="login_heading">Signup</h1>
+                    <img src={logo} width={75} height={75}/>
+                    <h3 className="heading"> CV MAKER</h3>
                     <form onSubmit={this.handleSubmit}>
                         <div className="form-group">
-                            <input type="text" name = "username" onChange={this.handleChange} placeholder="Username" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                            <TextField color='primary' required ={true} fullWidth={true} id="standard-basic" label="Username" type="text" name="username" onChange={this.handleChange}  />
                         </div>
                         <div className="form-group">
-                            <input type="number" name = "phone_number" onChange={this.handleChange} placeholder="Phone Number" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                            <TextField color='primary' required ={true} fullWidth={true} id="standard-basic" label="Number" type="text" name="phone_number" onChange={this.handleChange}  />
                         </div>
                         <div className="form-group">
-                            <input type="text" name = "first_name" onChange={this.handleChange} placeholder="First Name" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                            <TextField color='primary' required ={true} fullWidth={true} id="standard-basic" label="First Name" type="text" name="first_name" onChange={this.handleChange}  />
                         </div>
                         <div className="form-group">
-                            <input type="text" name = "last_name" onChange={this.handleChange} placeholder="Last Name" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                            <TextField color='primary' required ={true} fullWidth={true} id="standard-basic" label="Last Name" type="text" name="last_name" onChange={this.handleChange}  />
                         </div>
                         <div className="form-group">
-                            <input type="email" name = "email" onChange={this.handleChange} placeholder="Email Address" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                            <TextField color='primary' required ={true} fullWidth={true} id="standard-basic" label="Email Address" type="email" name="email" onChange={this.handleChange}  />
                         </div>
                         <div className="form-group">
-                            <input type="password" name = "password" placeholder="Password" onChange={this.handleChange} className="form-control" id="exampleInputPassword1" />
+                            <TextField color='primary' required ={true} fullWidth={true} id="standard-basic" label="Password" type="password" name="password" onChange={this.handleChange}  />
                         </div>
                         <div className="form-group">
-                            <input type="password" name = "re_password" placeholder="Re-Password" onChange={this.handleChange} className="form-control" id="exampleInputPassword1" />
+                            <TextField color='primary' required ={true} fullWidth={true} id="standard-basic" label="Re-Password" type="password" name="re_password" onChange={this.handleChange}  />
                         </div>
                         
-                        <button type="submit" className="btn btn-default">Submit</button>
-                        {this.state.isLoader? <div className="loader"></div>:''}
-                        <div className="status">{this.state.status}</div>
+                        <Button variant="contained"  type="submit" color="primary">Submit</Button>
+                        <div className={'status_' + this.props.status}>{this.props.status}</div>
                     </form>
 
                 </div>
@@ -107,4 +91,12 @@ class Signup extends Component {
 
 }
 
-export default Signup;
+const mapDispatchToProps = dispatch => ({
+    userRegisterAPI: userInfo => dispatch(userRegisterAPI(userInfo)),
+   
+})
+const mapStateToProps = state => ({
+    status: state.user.status
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(Signup);

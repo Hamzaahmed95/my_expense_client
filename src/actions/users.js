@@ -1,12 +1,11 @@
 import axios from 'axios'
 
 // GET LEADS
-export const userLoginFetch = (body) => dispatch =>{
+export const userLoginAPI = (body) => dispatch =>{
 
     axios.post('http://localhost:8000/auth/token/login', body)
             .then(function (response) {
                 localStorage.setItem("token", response.data.auth_token)
-                dispatch(loginUser(response.data))
                 dispatch({
                     type: 'LOGIN_USER',
                     payload: response.data,
@@ -27,7 +26,25 @@ export const userLoginFetch = (body) => dispatch =>{
             });
 }
 
-const loginUser = userObj => ({
-    type: 'LOGIN_USER',
-    payload: userObj
-})
+export const userRegisterAPI = (body) => dispatch =>{
+
+    axios.post('http://localhost:8000/auth/users/', body)
+            .then(function (response) {
+                dispatch({
+                    type: 'REGISTER_USER',
+                    payload: response.data,
+                    status: 'success'
+                })
+            })
+            .catch(function (error) {
+                console.log(error);
+                dispatch({
+                    type: 'REGISTER_USER',
+                    payload: {},
+                    status: 'failed'
+                })
+            })
+            .finally(function () {
+            
+            });
+}

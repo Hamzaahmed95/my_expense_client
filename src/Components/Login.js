@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import '../App.css'
+import {connect} from 'react-redux';
+import {userLoginFetch} from '../actions/users';
 
 class Login extends Component {
 
@@ -29,25 +31,26 @@ class Login extends Component {
             "email": this.state.email,
             "password": this.state.password
         }
+        this.props.userLoginFetch(body)
         console.log("body: " + this.state.email + " " + this.state.password)
 
-        axios.post('http://localhost:8000/auth/token/login', body)
-            .then(function (response) {
-                self.setState({ isLoader: false });
-                self.setState({status: 'success'})
-                // handle success
-                console.log(response.data.auth_token);
-            })
-            .catch(function (error) {
-                self.setState({ isLoader: false });
-                self.setState({status: 'failed'})
-                // handle error
-                console.log(error);
-            })
-            .finally(function () {
+        // axios.post('http://localhost:8000/auth/token/login', body)
+        //     .then(function (response) {
+        //         self.setState({ isLoader: false });
+        //         self.setState({status: 'success'})
+        //         // handle success
+        //         console.log(response.data.auth_token);
+        //     })
+        //     .catch(function (error) {
+        //         self.setState({ isLoader: false });
+        //         self.setState({status: 'failed'})
+        //         // handle error
+        //         console.log(error);
+        //     })
+        //     .finally(function () {
                 
-                // always executed
-            });
+        //         // always executed
+        //     });
 
         event.preventDefault();
     }
@@ -68,8 +71,8 @@ class Login extends Component {
                         </div>
                         
                         <button type="submit" className="btn btn-default">Submit</button>
-                        {this.state.isLoader? <div className="loader"></div>:''}
-                        <div className="status">{this.state.status}</div>
+                        {/* {this.state.isLoader? <div className="loader"></div>:''}
+                        <div className="status">{this.state.status}</div> */}
                     </form>
 
                 </div>
@@ -78,5 +81,9 @@ class Login extends Component {
     }
 
 }
+const mapDispatchToProps = dispatch => ({
+    userLoginFetch: userInfo => dispatch(userLoginFetch(userInfo))
+  })
+  
+export default connect(null, mapDispatchToProps)(Login);
 
-export default Login;

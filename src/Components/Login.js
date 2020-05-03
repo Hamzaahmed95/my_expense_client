@@ -1,69 +1,58 @@
-import React, { Component } from 'react';
+import React, {useState} from 'react';
 import '../App.css'
-import { connect } from 'react-redux';
 import {Button,TextField} from '@material-ui/core';
 import { userLoginAPI } from '../actions/users';
 import logo from '../logo.png';
+import {useSelector, useDispatch} from 'react-redux'
 
-class Login extends Component {
+export const Login = () =>{
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            email: '',
-            password: '',
-        };
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-
-    }
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const status = useSelector(state => state.user.status);
+    const dispatch = useDispatch()
+   
     
-    handleChange(event) {
-        this.setState({ [event.target.name]: event.target.value })
+    const handleChange =(event)=> {
+        if(event.target.name==='password'){
+            setPassword(event.target.value)
+        }
+        else{
+            setEmail(event.target.value)
+        }
     }
 
-    handleSubmit(event) {
+    const handleSubmit = (event)=> {
 
         const body = {
-            "email": this.state.email,
-            "password": this.state.password
+            email,
+            password
         }
-
-        this.props.userLoginAPI(body)
+        dispatch(userLoginAPI(body))
+        
         event.preventDefault();
     }
 
-    render() {
         return (
             <div className="App">
                 <div className="container">
                     <img src={logo} width={75} height={75}/>
                     <h3 className="heading"> CV MAKER</h3>
-                    <form onSubmit={this.handleSubmit}>
+                    <form onSubmit={handleSubmit.bind(this)}>
                         <div className="form-group">
-                            <TextField color='primary' required ={true} fullWidth={true} id="standard-basic" label="Email" type="email" name="email" onChange={this.handleChange}  />
+                            <TextField color='primary' required ={true} fullWidth={true} id="standard-basic" label="Email" type="email" name="email" onChange={handleChange.bind(this)}  />
                         </div>
                         <div className="form-group">
-                            <TextField type="password" required ={true} fullWidth={true} name="password" id="standard-basic" label="Password" onChange={this.handleChange} />
+                            <TextField type="password" required ={true} fullWidth={true} name="password" id="standard-basic" label="Password" onChange={handleChange.bind(this)} />
                         </div>
                     
                         <Button variant="contained"  type="submit" color="primary">Login</Button>
-                        <div className={'status_' + this.props.status}>{this.props.status}</div>
+                        <div className={'status_' + status}>{status}</div>
                     </form>
 
                 </div>
             </div>
         );
-    }
 
 }
-const mapDispatchToProps = dispatch => ({
-    userLoginAPI: userInfo => dispatch(userLoginAPI(userInfo)),
-   
-})
-const mapStateToProps = state => ({
-    status: state.user.status
-})
-
-export default connect(mapStateToProps,mapDispatchToProps)(Login);
 

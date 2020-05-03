@@ -15,39 +15,30 @@ class Login extends Component {
         this.state = {
             email: '',
             password: '',
-            isLoader: false,
-            status: ''
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
 
     }
-    static propTypes = {
-        currentUser: PropTypes.array.isRequired
-    }
+    
     handleChange(event) {
         this.setState({ [event.target.name]: event.target.value })
     }
 
     handleSubmit(event) {
 
-        this.setState({ isLoader: true });
-        let self = this;
         const body = {
             "email": this.state.email,
             "password": this.state.password
         }
-        this.props.userLoginFetch(body)
 
+        this.props.userLoginFetch(body)
         event.preventDefault();
     }
 
-    
-   
     render() {
         return (
             <div className="App">
-
                 <div className="container">
                     <img src={logo} width={75} height={75}/>
                     <h3 className="heading"> CV MAKER</h3>
@@ -57,12 +48,10 @@ class Login extends Component {
                         </div>
                         <div className="form-group">
                             <TextField type="password" required ={true} fullWidth={true} name="password" id="standard-basic" label="Password" onChange={this.handleChange} />
-
                         </div>
                     
                         <Button variant="contained"  type="submit" color="primary">Login</Button>
                         <div className={'status_' + this.props.status}>{this.props.status}</div>
-
                     </form>
 
                 </div>
@@ -71,13 +60,6 @@ class Login extends Component {
     }
 
 }
-
-const styles = theme => ({
-  notchedOutline: {
-    borderWidth: "1px",
-    borderColor: "yellow !important"
-  }
-});
 const mapDispatchToProps = dispatch => ({
     userLoginFetch: userInfo => dispatch(userLoginFetch(userInfo)),
    

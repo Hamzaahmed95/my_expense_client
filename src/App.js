@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import axios from 'axios'
 import {Login} from './Components/Login'
-import Signup from './Components/Signup'
+import {Signup} from './Components/Signup'
 import store from './store'
 
 import { Provider } from 'react-redux';

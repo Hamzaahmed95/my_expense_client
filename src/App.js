@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import {Login} from './Components/Login'
-import {Signup} from './Components/Signup'
+import { Switch, Route } from 'react-router-dom'
+import { Login } from './Components/Login.js'
+import { Signup } from './Components/Signup.js'
 import store from './store'
-
 import { Provider } from 'react-redux';
 
 class App extends Component {
@@ -11,7 +11,12 @@ class App extends Component {
     return (
       <Provider store={store}>
         <div className="App">
-          <Login />
+          <main>
+            <Switch>
+              <Route path="/login" component={Login} exact />
+              <Route path="/signup" component={Signup} />
+            </Switch>
+          </main>
         </div>
       </Provider>
     );

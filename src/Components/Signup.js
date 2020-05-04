@@ -4,6 +4,7 @@ import { userRegisterAPI } from '../actions/users';
 import {Button,TextField} from '@material-ui/core';
 import logo from '../logo.png';
 import '../App.css'
+import { Link } from 'react-router-dom'
 
 export const Signup = () => {
 
@@ -91,7 +92,8 @@ export const Signup = () => {
                         <Button variant="contained"  type="submit" color="primary">Submit</Button>
                         <div className={'status_' + status}>{status}</div>
                     </form>
-
+                    <br/>
+                    <span>Already have an account? <Link to="/login">Login </Link> Here</span>
                 </div>
             </div>
         );

@@ -4,6 +4,7 @@ import {Button,TextField} from '@material-ui/core';
 import { userLoginAPI } from '../actions/users';
 import logo from '../logo.png';
 import {useSelector, useDispatch} from 'react-redux'
+import { Link } from 'react-router-dom'
 
 
 export const Login = () =>{
@@ -51,6 +52,8 @@ export const Login = () =>{
                         <Button variant="contained"  type="submit" color="primary">Login</Button>
                         <div className={'status_' + status}>{status}</div>
                     </form>
+                    <br/>
+                    <span>Dont have an account? <Link to="/signup">Register </Link> Here</span>
 
                 </div>
             </div>

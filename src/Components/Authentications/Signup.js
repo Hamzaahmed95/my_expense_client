@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import {useSelector, useDispatch} from 'react-redux'
 import { userRegisterAPI } from '../../actions/authentication_actions';
 import {Button,TextField} from '@material-ui/core';
-import logo from '../../logo.png';
-import '../../App.css'
+import logo from '../../public/logo.png';
+import '../App/App.css'
 import { Link } from 'react-router-dom'
 
 export const Signup = () => {

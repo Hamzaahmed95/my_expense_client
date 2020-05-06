@@ -1,0 +1,20 @@
+.navbar{
+    padding-top: 1%;
+    padding-left: 5% !important;
+    padding-right: 5% !important;
+    background-color: black !important ;
+}
+.navbar-brand{
+    font-family: 'Times New Roman', Times, serif !important;
+    color:#EECD9E !important;
+}
+.btn-outline-success{
+    font-family: 'Times New Roman', Times, serif !important;
+    border-style: solid !important;
+    border-color: #EECD9E !important;
+    color: #EECD9E !important;
+}
+.btn-outline-success:hover{
+    background-color: #EECD9E !important;
+    color: black !important;
+}

@@ -1,13 +1,16 @@
-import React,{Component }from 'react';
+import React, { Component } from 'react';
+import {Header} from '../Header'
 
 class Profile extends Component {
 
-  render(){
+  componentDidMount() {
+  }
+  render() {
     return (
-      <div className="App">
-        <h1>hello from My Profile!</h1>
+      <div className="profile">
+        <Header/>
       </div>
-  );
+    );
   }
 }
 export default Profile

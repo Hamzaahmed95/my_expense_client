@@ -1,11 +1,11 @@
 import axios from 'axios'
-import { useHistory } from 'react-router-dom'
 // GET LEADS
 export const userLoginAPI = (body) => dispatch =>{
 
     axios.post('http://localhost:8000/auth/token/login', body)
             .then(function (response) {
                 localStorage.setItem("token", response.data.auth_token)
+                
                 dispatch({
                     type: 'LOGIN_USER',
                     payload: response.data,
@@ -13,7 +13,7 @@ export const userLoginAPI = (body) => dispatch =>{
                     login_status:true
                 })
                
-                console.log("response: "+JSON.stringify(response.data.auth_token))
+                console.log("response: "+JSON.stringify(response.data))
             })
             .catch(function (error) {
                 // handle error

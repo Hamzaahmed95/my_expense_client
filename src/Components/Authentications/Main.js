@@ -1,10 +1,10 @@
 import React from 'react';
 
-export const Error = () =>{
+export const Main = () =>{
 
     return (
         <div className="App">
-          <h1>Error</h1>
+          <h1>Landing Page</h1>
         </div>
     );
 }

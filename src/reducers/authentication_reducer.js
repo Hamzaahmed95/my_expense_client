@@ -1,6 +1,7 @@
 const initialState = {
     currentUser: {},
-    status: ''
+    isLoggedIn: false,
+    statusMessage: ''
   }
   
 
@@ -11,13 +12,15 @@ export default function(state = initialState,action) {
           return {
             ...state, 
             currentUser: action.payload,
-            status: action.status
+            statusMessage: action.message,
+            isLoggedIn:action.login_status
           }
         case 'REGISTER_USER':
           return {
             ...state, 
             currentUser: action.payload,
-            status: action.status
+            statusMessage: action.message,
+            isLoggedIn:action.login_status
           }
         default:
           return state;

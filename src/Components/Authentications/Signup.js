@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import {useSelector, useDispatch} from 'react-redux'
-import { userRegisterAPI } from '../actions/users';
+import { userRegisterAPI } from '../../actions/authentication_actions';
 import {Button,TextField} from '@material-ui/core';
-import logo from '../logo.png';
-import '../App.css'
+import logo from '../../logo.png';
+import '../../App.css'
 import { Link } from 'react-router-dom'
 
 export const Signup = () => {
@@ -15,7 +15,7 @@ export const Signup = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [re_password, setRePassword] = useState('');
-    const status = useSelector(state => state.user.status);
+    const status = useSelector(state => state.authentication_reducer.status);
     const dispatch = useDispatch()
    
     const handleChange = (event) => {

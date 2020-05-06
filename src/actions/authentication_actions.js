@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+import { useHistory } from 'react-router-dom'
 // GET LEADS
 export const userLoginAPI = (body) => dispatch =>{
 
@@ -9,8 +9,10 @@ export const userLoginAPI = (body) => dispatch =>{
                 dispatch({
                     type: 'LOGIN_USER',
                     payload: response.data,
-                    status: 'success'
+                    message: 'success',
+                    login_status:true
                 })
+               
                 console.log("response: "+JSON.stringify(response.data.auth_token))
             })
             .catch(function (error) {
@@ -19,7 +21,8 @@ export const userLoginAPI = (body) => dispatch =>{
                 dispatch({
                     type: 'LOGIN_USER',
                     payload: {},
-                    status: 'failed'
+                    message: 'failed',
+                    login_status:false
                 })
             })
             .finally(function () {

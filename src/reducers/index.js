@@ -1,7 +1,7 @@
 import { combineReducers} from 'redux'
-import user from './user'
+import authentication_reducer from './authentication_reducer'
 
 export default combineReducers({
-    user
+    authentication_reducer
 });
 

@@ -11,7 +11,7 @@ export default function(state = initialState,action) {
             ...state, 
             myExpense: action.payload,
           }
-          case 'DELETE_LEAD':
+          case 'DELETE_MYEXPENSE':
             return{
                 ...state,
                 myExpense: state.myExpense.filter(myExpense => myExpense.id !== action.payload)

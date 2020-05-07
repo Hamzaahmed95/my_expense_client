@@ -1,5 +1,30 @@
 .MyExpense{
-    padding-top: 10% !important;
-    padding-right: 5% !important;
-    padding-left: 10% !important;
+    margin-top: 3% !important;
+    margin-right: 5% !important;
+    margin-left: 5% !important;
+    background: #323232;
+}
+
+.myRow{
+    padding:2% !important;
+}
+.MyExpenseAddButton{
+    float: right;
+    background-color: #556B2F !important;
+    color: white !important;
+    font-family: 'Times New Roman', Times, serif !important;
+    border-style: solid !important;
+    border-color: #556B2F !important;
+   
+}
+.MyExpenseHeading{
+    color: white;
+}
+
+.MyExpenseAddButton:hover{
+    background-color: white !important;
+    color: #556B2F !important;
+}
+.cell{
+    font-size: 10px !important;
 }

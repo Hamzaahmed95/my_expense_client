@@ -5,12 +5,9 @@ import { Dropdown } from 'react-bootstrap'
 import '../../public/my_expense.css'
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { MyModal } from '../../Components/MyModal'
-import edit_icon from '../../public/edit_icon.png'
+import { CreateModal } from '../CreateModal'
+import { UpdateModal } from '../UpdateModel'
 import delete_icon from '../../public/delete_icon.png'
-
-
-
 
 class MyExpense extends Component {
 
@@ -41,7 +38,7 @@ class MyExpense extends Component {
 
                     <div className="row myRow">
                         <div className="col-md-10 "> <h3 className="MyExpenseHeading">My Expense </h3></div>
-                        <div className="col-md-2"> <MyModal /></div>
+                        <div className="col-md-2"> <CreateModal /></div>
                     </div>
                     <TableContainer component={Paper}>
                         <Table aria-label="simple table">
@@ -72,7 +69,7 @@ class MyExpense extends Component {
                                         <TableCell className="cell" align="left">{myexpense.channel}</TableCell>
                                         <TableCell className="cell" align="left">{myexpense.rates}</TableCell>
                                         <TableCell className="cell" align="center">
-                                            <img src={edit_icon} width={15} height={17} />
+                                         <UpdateModal body={myexpense}/>
                                         </TableCell>
                                         <TableCell className="cell" align="center">
                                             <img onClick={this.props.deleteMyExpense.bind(this, myexpense.id)} src={delete_icon} width={15} height={17} />

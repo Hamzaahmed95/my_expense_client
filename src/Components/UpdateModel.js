@@ -1,21 +1,23 @@
 import Modal from 'react-bootstrap/Modal'
 import React, { useState } from 'react'
-import { createMyExpense } from '../actions/my_expense'
-import { Button, TextField,Select } from '@material-ui/core';
+import { updateMyExpense } from '../actions/my_expense'
+import { Button, TextField, Select } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux'
+import edit_icon from '../public/edit_icon.png'
 
-export function MyModal() {
+export function UpdateModal(props) {
     const [show, setShow] = useState(false);
+    console.log("props?"+JSON.stringify(props))
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const [month, setMonth] = useState('');
-    const [amount_send, setAmountSent] = useState(0.00);
-    const [amount_received, setAmountReceived] = useState(0.00);
-    const [sent_date, setSentDate] = useState(null);
-    const [channel, setChannel] = useState('');
-    const [rates, setRates] = useState(0.00);
+    const [month, setMonth] = useState(props.body.month);
+    const [amount_send, setAmountSent] = useState(props.body.amount_send);
+    const [amount_received, setAmountReceived] = useState(props.body.amount_received);
+    const [sent_date, setSentDate] = useState(props.body.sent_date);
+    const [channel, setChannel] = useState(props.body.channel);
+    const [rates, setRates] = useState(props.body.rates);
     const dispatch = useDispatch()
 
     const handleChange = (event) => {
@@ -43,7 +45,7 @@ export function MyModal() {
     const handleSubmit = (event) => {
 
 
-        const body = {
+        const body2= {
             month,
             amount_send,
             amount_received,
@@ -51,16 +53,16 @@ export function MyModal() {
             channel,
             rates,
         }
-        console.log(body.month + " " + body.amount_send + " " + body.amount_received + " " + body.sent_date + " " + body.channel + " " + body.rates)
+        console.log(props.body.id+" "+body2.month + " " + body2.amount_send + " " + body2.amount_received + " " + body2.sent_date + " " + body2.channel + " " + body2.rates)
 
-        dispatch(createMyExpense(body))
+        dispatch(updateMyExpense(body2,props.body.id))
         setShow(false)
         event.preventDefault();
     }
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     return (
         <>
-            <button variant="primary" onClick={handleShow} className="MyExpenseAddButton btn btn-outline-primary my-2 my-sm-0" type="submit">Add</button>
+            <img src={edit_icon} onClick={handleShow} width={15} height={17} /> 
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Modal heading</Modal.Title>
@@ -68,25 +70,24 @@ export function MyModal() {
                 <Modal.Body>
                     <form onSubmit={handleSubmit.bind(this)}>
                         <div className="form-group">
-
-                            <Select fullWidth={true} id="standard-basic" label="Month" type="text" name="month" onChange={handleChange.bind(this)} className="browser-default">
-                                {months.map(month => (<option value={month}>{month}</option>))}
+                            <Select fullWidth={true} id="standard-basic" label="Month"  onChange={handleChange.bind(this)} >
+                            {months.map(month => (<option value={month}>{month}</option>))}
                             </Select>
-                         </div>
-                        <div className="form-group">
-                            <TextField color='primary' required={true} fullWidth={true} id="standard-basic" label="Amount Sent" type="number" name="amount_send" onChange={handleChange.bind(this)} />
                         </div>
                         <div className="form-group">
-                            <TextField color='primary' required={true} fullWidth={true} id="standard-basic" label="Amount Received" type="number" name="amount_received" onChange={handleChange.bind(this)} />
+                            <TextField color='primary'  value={amount_send}required={true} fullWidth={true} id="standard-basic" label="Amount Sent" type="number" name="amount_send" onChange={handleChange.bind(this)} />
                         </div>
                         <div className="form-group">
-                            <TextField color='primary' required={true} fullWidth={true} id="standard-basic" type="date" name="sent_date" onChange={handleChange.bind(this)} />
+                            <TextField color='primary' value={amount_received} required={true} fullWidth={true} id="standard-basic" label="Amount Received" type="number" name="amount_received" onChange={handleChange.bind(this)} />
                         </div>
                         <div className="form-group">
-                            <TextField color='primary' required={true} fullWidth={true} id="standard-basic" label="Channel" type="text" name="channel" onChange={handleChange.bind(this)} />
+                            <TextField color='primary' value={sent_date} required={true} fullWidth={true} id="standard-basic" type="date" name="sent_date" onChange={handleChange.bind(this)} />
                         </div>
                         <div className="form-group">
-                            <TextField color='primary' required={true} fullWidth={true} id="standard-basic" label="Rates" type="text" name="rates" onChange={handleChange.bind(this)} />
+                            <TextField color='primary' value={channel} required={true} fullWidth={true} id="standard-basic" label="Channel" type="text" name="channel" onChange={handleChange.bind(this)} />
+                        </div>
+                        <div className="form-group">
+                            <TextField color='primary' value={rates} required={true} fullWidth={true} id="standard-basic" label="Rates" type="text" name="rates" onChange={handleChange.bind(this)} />
                         </div>
 
                         <Button variant="contained" type="submit" color="primary">Submit</Button>

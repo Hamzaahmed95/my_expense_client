@@ -43,9 +43,9 @@ export const readMyExpense = () => dispatch =>{
 }
 
 //UPDATE 
-export const updateMyExpense = (id) => dispatch =>{
+export const updateMyExpense = (body,id) => dispatch =>{
 
-    axios.get(`http://localhost:8000/my_expense/${id}/`)
+    axios.put(`http://localhost:8000/my_expense/${id}/`,body)
             .then(function (response) {
                 
                 dispatch({

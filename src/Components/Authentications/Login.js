@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import '../App/App.css'
 import {Button,TextField} from '@material-ui/core';
 import { userLoginAPI } from '../../actions/authentication_actions';
-import logo from '../../public/logo.png';
+import logo from '../../public/logo.jpg';
 import {useSelector, useDispatch} from 'react-redux'
 import { Link,Redirect } from 'react-router-dom'
 

@@ -4,7 +4,6 @@ export const getMyExpense = () => dispatch =>{
 
     axios.get('http://localhost:8000/my_expense/')
             .then(function (response) {
-                localStorage.setItem("token", response.data.auth_token)
                 
                 dispatch({
                     type: 'MY_EXPENSE',

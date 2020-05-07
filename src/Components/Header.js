@@ -7,7 +7,6 @@ export const Header = () => {
 
     return (
         <div className="header">
-           
             <nav className="navbar navbar-light bg-dark justify-content-between">
                 <a className="navbar-brand">
                 <img src={logo} width={35} height={35}/> My Expense</a>

@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
-import { getMyExpense, editMyExpense,deleteMyExpense } from '../../actions/my_expense'
-import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
+import { readMyExpense, updateMyExpense, deleteMyExpense } from '../../actions/my_expense'
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
+import { Dropdown } from 'react-bootstrap'
 import '../../public/my_expense.css'
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -10,33 +10,39 @@ import edit_icon from '../../public/edit_icon.png'
 import delete_icon from '../../public/delete_icon.png'
 
 
+
+
 class MyExpense extends Component {
 
     constructor(props) {
         super(props);
-        
+        this.handleChange = this.handleChange.bind(this)
     }
 
     static propTypes = {
-        myexpense: PropTypes.array.isRequired
+        myexpense: PropTypes.array.isRequired,
     }
 
     componentDidMount() {
-        this.props.getMyExpense()
+        this.props.readMyExpense()
     }
+    handleChange(e) {
+        console.log(this.refs.month)
+
+    }
+
 
     render() {
        
         return (
             <Fragment>
-                
+
                 <div className="MyExpense">
 
                     <div className="row myRow">
                         <div className="col-md-10 "> <h3 className="MyExpenseHeading">My Expense </h3></div>
-                        <div className="col-md-2"> <MyModal/></div>
+                        <div className="col-md-2"> <MyModal /></div>
                     </div>
-                   
                     <TableContainer component={Paper}>
                         <Table aria-label="simple table">
                             <TableHead>
@@ -53,6 +59,7 @@ class MyExpense extends Component {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
+
                                 {this.props.myexpense.map(myexpense => (
                                     <TableRow key={myexpense.id}>
                                         <TableCell className="cell" component="th" scope="row">
@@ -68,23 +75,26 @@ class MyExpense extends Component {
                                             <img src={edit_icon} width={15} height={17} />
                                         </TableCell>
                                         <TableCell className="cell" align="center">
-                                            <img onClick={this.props.deleteMyExpense.bind(this,myexpense.id)} src={delete_icon} width={15} height={17} />
+                                            <img onClick={this.props.deleteMyExpense.bind(this, myexpense.id)} src={delete_icon} width={15} height={17} />
                                         </TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>
+
+
                         </Table>
                     </TableContainer>
-                </div>
-            </Fragment>
+                </div >
+            </Fragment >
 
         );
     }
 }
 
 const mapStateToProps = state => ({
-    myexpense: state.my_expense.myExpense
+    myexpense: state.my_expense.myExpense,
+    status: state.my_expense.status
 })
 
-export default connect(mapStateToProps, { getMyExpense, editMyExpense,deleteMyExpense })(MyExpense);
+export default connect(mapStateToProps, { readMyExpense, updateMyExpense, deleteMyExpense })(MyExpense);
 

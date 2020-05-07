@@ -26,10 +26,8 @@ class Profile extends Component {
       <div className="profile">
         <Header />
         <div className="row">
-          <div className="col-md-12"><MyExpense /></div>
+          <div className="col-md-12 "><MyExpense /></div>
         </div>
-        <MyModal/>
-       
       </div>
     );
   }

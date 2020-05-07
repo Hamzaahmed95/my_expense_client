@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { getMyExpense, editMyExpense } from '../../actions/my_expense'
+import { getMyExpense, editMyExpense,deleteMyExpense } from '../../actions/my_expense'
 import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import '../../public/my_expense.css'
@@ -14,6 +14,7 @@ class MyExpense extends Component {
 
     constructor(props) {
         super(props);
+        
     }
 
     static propTypes = {
@@ -67,7 +68,7 @@ class MyExpense extends Component {
                                             <img src={edit_icon} width={15} height={17} />
                                         </TableCell>
                                         <TableCell className="cell" align="center">
-                                            <img src={delete_icon} width={15} height={17} />
+                                            <img onClick={this.props.deleteMyExpense.bind(this,myexpense.id)} src={delete_icon} width={15} height={17} />
                                         </TableCell>
                                     </TableRow>
                                 ))}
@@ -85,5 +86,5 @@ const mapStateToProps = state => ({
     myexpense: state.my_expense.myExpense
 })
 
-export default connect(mapStateToProps, { getMyExpense, editMyExpense })(MyExpense);
+export default connect(mapStateToProps, { getMyExpense, editMyExpense,deleteMyExpense })(MyExpense);
 

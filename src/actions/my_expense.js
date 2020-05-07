@@ -53,3 +53,14 @@ export const editMyExpense = (id) => dispatch =>{
             .finally(function () {
             });
 }
+
+export const deleteMyExpense = (id) => dispatch => {
+
+    axios.delete(`http://localhost:8000/my_expense/${id}/`)
+    .then(res => {
+        dispatch({
+            type: 'DELETE_MYEXPENSE',
+            payload: id
+        })
+    }).catch(err => console.log(err));
+}

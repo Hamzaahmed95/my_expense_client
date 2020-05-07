@@ -5,30 +5,37 @@ import { withStyles } from '@material-ui/core/styles';
 import '../../public/my_expense.css'
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { MyModal } from '../../Components/MyModal'
 import edit_icon from '../../public/edit_icon.png'
 import delete_icon from '../../public/delete_icon.png'
 
 
 class MyExpense extends Component {
 
+    constructor(props) {
+        super(props);
+    }
+
     static propTypes = {
         myexpense: PropTypes.array.isRequired
     }
+
     componentDidMount() {
         this.props.getMyExpense()
     }
 
     render() {
-        const { classes } = this.props;
+       
         return (
             <Fragment>
+                
                 <div className="MyExpense">
+
                     <div className="row myRow">
                         <div className="col-md-10 "> <h3 className="MyExpenseHeading">My Expense </h3></div>
-                        <div className="col-md-2"> <button className="MyExpenseAddButton btn btn-outline-primary my-2 my-sm-0" type="submit">Add</button></div>
+                        <div className="col-md-2"> <MyModal/></div>
                     </div>
-
-
+                   
                     <TableContainer component={Paper}>
                         <Table aria-label="simple table">
                             <TableHead>
@@ -57,10 +64,10 @@ class MyExpense extends Component {
                                         <TableCell className="cell" align="left">{myexpense.channel}</TableCell>
                                         <TableCell className="cell" align="left">{myexpense.rates}</TableCell>
                                         <TableCell className="cell" align="center">
-                                            <img  src={edit_icon} width={15} height={17}/>
+                                            <img src={edit_icon} width={15} height={17} />
                                         </TableCell>
                                         <TableCell className="cell" align="center">
-                                            <img src={delete_icon} width={15} height={17}/>
+                                            <img src={delete_icon} width={15} height={17} />
                                         </TableCell>
                                     </TableRow>
                                 ))}

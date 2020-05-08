@@ -1,13 +1,13 @@
 import Modal from 'react-bootstrap/Modal'
 import React, { useState } from 'react'
 import { updateMyExpense } from '../../../actions/my_expense'
-import { Button, TextField, Select } from '@material-ui/core';
+import { Button, TextField, Select, MenuItem } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux'
 import edit_icon from '../../../public/assets/edit_icon.png'
 
 export function UpdateMyExpense(props) {
     const [show, setShow] = useState(false);
-    console.log("props?"+JSON.stringify(props))
+    console.log("props?" + JSON.stringify(props))
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -45,7 +45,7 @@ export function UpdateMyExpense(props) {
     const handleSubmit = (event) => {
 
 
-        const body2= {
+        const body2 = {
             month,
             amount_send,
             amount_received,
@@ -53,16 +53,16 @@ export function UpdateMyExpense(props) {
             channel,
             rates,
         }
-        console.log(props.body.id+" "+body2.month + " " + body2.amount_send + " " + body2.amount_received + " " + body2.sent_date + " " + body2.channel + " " + body2.rates)
+        console.log(props.body.id + " " + body2.month + " " + body2.amount_send + " " + body2.amount_received + " " + body2.sent_date + " " + body2.channel + " " + body2.rates)
 
-        dispatch(updateMyExpense(body2,props.body.id))
+        dispatch(updateMyExpense(body2, props.body.id))
         setShow(false)
         event.preventDefault();
     }
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     return (
         <>
-            <img src={edit_icon} onClick={handleShow} width={15} height={17} /> 
+            <img src={edit_icon} onClick={handleShow} width={15} height={17} />
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Modal heading</Modal.Title>
@@ -70,13 +70,14 @@ export function UpdateMyExpense(props) {
                 <Modal.Body>
                     <form onSubmit={handleSubmit.bind(this)}>
                         <div className="form-group">
-                            
-                            <Select fullWidth={true} id="standard-basic" label="Month"  name="month" onChange={handleChange.bind(this)} >
-                                {months.map(month => (<option value={month}>{month}</option>))}
-                            </Select>  
+
+                            <Select value={month} fullWidth={true} id="standard-basic" label="Month" name="month" onChange={handleChange.bind(this)} >
+                                {months.map(month => (<MenuItem value={month}>{month}</MenuItem>))}
+                            </Select>
                         </div>
+                       
                         <div className="form-group">
-                            <TextField color='primary'  value={amount_send}required={true} fullWidth={true} id="standard-basic" label="Amount Sent" type="number" name="amount_send" onChange={handleChange.bind(this)} />
+                            <TextField color='primary' value={amount_send} required={true} fullWidth={true} id="standard-basic" label="Amount Sent" type="number" name="amount_send" onChange={handleChange.bind(this)} />
                         </div>
                         <div className="form-group">
                             <TextField color='primary' value={amount_received} required={true} fullWidth={true} id="standard-basic" label="Amount Received" type="number" name="amount_received" onChange={handleChange.bind(this)} />

@@ -1,7 +1,7 @@
 import Modal from 'react-bootstrap/Modal'
 import React, { useState } from 'react'
 import { createMyExpense } from '../../../actions/my_expense.js'
-import { Button, TextField, Select } from '@material-ui/core';
+import { Button, TextField, Select, MenuItem } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux'
 
 export function CreateMyExpense() {
@@ -67,11 +67,21 @@ export function CreateMyExpense() {
                 </Modal.Header>
                 <Modal.Body>
                     <form onSubmit={handleSubmit.bind(this)}>
-                        <div className="form-group"> 
-                            <Select fullWidth={true} id="standard-basic" label="Month"  name="month" onChange={handleChange.bind(this)} >
-                                {months.map(month => (<option value={month}>{month}</option>))}
-                            </Select>    
+                        <div className="form-group">
+                            {/* <Select
+                                name="month" 
+                                fullWidth={true}
+                                options={months}
+                                value={month}
+                                onChange={handleChange.bind(this)}
+                                defaultValue={'Choose Month'}
+                            /> */}
+                        
+                            <Select fullWidth={true} value={month} id="standard-basic" label="Month" name="month" onChange={handleChange.bind(this)} >
+                                {months.map(month => (<MenuItem value={month}>{month}</MenuItem>))}
+                            </Select>
                         </div>
+
                         <div className="form-group">
                             <TextField color='primary' required={true} fullWidth={true} id="standard-basic" label="Amount Sent" type="number" name="amount_send" onChange={handleChange.bind(this)} />
                         </div>
@@ -82,7 +92,7 @@ export function CreateMyExpense() {
                             <TextField color='primary' required={true} fullWidth={true} id="standard-basic" type="date" name="sent_date" onChange={handleChange.bind(this)} />
                         </div>
                         <div className="form-group">
-                            <TextField color='primary' required={true} fullWidth={true} id="standard-basic"  label="Channel" type="text" name="channel" onChange={handleChange.bind(this)} />
+                            <TextField color='primary' required={true} fullWidth={true} id="standard-basic" label="Channel" type="text" name="channel" onChange={handleChange.bind(this)} />
                         </div>
                         <div className="form-group">
                             <TextField color='primary' required={true} fullWidth={true} id="standard-basic" label="Rates" type="text" name="rates" onChange={handleChange.bind(this)} />

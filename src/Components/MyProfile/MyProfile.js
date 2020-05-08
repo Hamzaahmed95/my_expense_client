@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Header } from '../Header'
+import { Header } from '../../containers/Header/Header.js'
 import MyExpense from '../MyExpense/MyExpense'
 
 class Profile extends Component {

@@ -1,13 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import { readMyExpense, updateMyExpense, deleteMyExpense } from '../../actions/my_expense'
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
-import { Dropdown } from 'react-bootstrap'
-import '../../public/my_expense.css'
+import './MyExpense.css'
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { CreateModal } from '../CreateModal'
-import { UpdateModal } from '../UpdateModel'
-import delete_icon from '../../public/delete_icon.png'
+import { CreateMyExpense } from '../../containers/Modals/CreateModal/CreateMyExpense.js'
+import { UpdateMyExpense } from '../../containers/Modals/UpdateModal/UpdateMyExpense.js'
+import delete_icon from '../../public/assets/delete_icon.png'
+
 
 class MyExpense extends Component {
 
@@ -38,7 +38,7 @@ class MyExpense extends Component {
 
                     <div className="row myRow">
                         <div className="col-md-10 "> <h3 className="MyExpenseHeading">My Expense </h3></div>
-                        <div className="col-md-2"> <CreateModal /></div>
+                        <div className="col-md-2"> <CreateMyExpense /></div>
                     </div>
                     <TableContainer component={Paper}>
                         <Table aria-label="simple table">
@@ -69,7 +69,7 @@ class MyExpense extends Component {
                                         <TableCell className="cell" align="left">{myexpense.channel}</TableCell>
                                         <TableCell className="cell" align="left">{myexpense.rates}</TableCell>
                                         <TableCell className="cell" align="center">
-                                         <UpdateModal body={myexpense}/>
+                                         <UpdateMyExpense body ={myexpense}/>
                                         </TableCell>
                                         <TableCell className="cell" align="center">
                                             <img onClick={this.props.deleteMyExpense.bind(this, myexpense.id)} src={delete_icon} width={15} height={17} />

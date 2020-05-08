@@ -1,0 +1,25 @@
+.status_success{
+    padding-top: 5%;
+    color: #28a303;
+  }
+  .status_failed{
+    padding-top: 5%;
+    color: #6e0000;
+  }
+
+.container{
+    width: 30% !important;
+    margin-top: 5%;
+    padding-top: 2%;
+    padding-right: 5%;
+    padding-bottom: 3%;
+    border-style: solid;
+    border-color: #4B0082;
+    background-color: #ffffff;
+    
+}
+
+.heading{
+    font-family: 'Times New Roman', Times, serif;
+  }
+  

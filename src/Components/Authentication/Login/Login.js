@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import '../App/App.css'
+import './Login.css'
 import {Button,TextField} from '@material-ui/core';
-import { userLoginAPI } from '../../actions/authentication_actions';
-import logo from '../../public/logo.jpg';
+import { userLoginAPI } from '../../../actions/authentication';
+import logo from '../../../public/assets/logo.jpg';
 import {useSelector, useDispatch} from 'react-redux'
 import { Link,Redirect } from 'react-router-dom'
 
@@ -11,8 +11,8 @@ export const Login = () =>{
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const status = useSelector(state => state.authentication_reducer.statusMessage);
-    const isLoggedIn = useSelector(state => state.authentication_reducer.isLoggedIn);
+    const status = useSelector(state => state.authentication.statusMessage);
+    const isLoggedIn = useSelector(state => state.authentication.isLoggedIn);
     const dispatch = useDispatch()
    
     

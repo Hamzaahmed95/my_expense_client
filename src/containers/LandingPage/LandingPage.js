@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Main = () =>{
+export const LandingPage = () =>{
 
     return (
         <div className="App">

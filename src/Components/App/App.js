@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Switch, Route } from 'react-router-dom'
-import { Login } from '../Authentications/Login.js'
-import { Signup } from '../Authentications/Signup.js'
-import { Main } from '../Authentications/Main.js'
-import { Error } from '../Authentications/Error.js'
-import UserProfile from '../UserProfile/Profile'
-import {PrivateRoute} from '../../Utils/PrivateRoutes'
+import { Login } from '../Authentication/Login/Login.js'
+import { Signup } from '../Authentication/Signup/Signup.js'
+import { LandingPage } from '../../containers/LandingPage/LandingPage.js'
+import { Error } from '../../containers/Error/Error.js'
+import MyProfile from '../MyProfile/MyProfile.js'
+import {PrivateRoute} from '../../utils/PrivateRoutes'
 import store from '../../store'
 import { Provider } from 'react-redux';
 
@@ -18,11 +18,11 @@ class App extends Component {
         <div className="App">
           <main>
             <Switch>
-              <Route path="/" component={Main} exact />
+              <Route path="/" component={LandingPage} exact />
               <Route path="/login" component={Login} exact />
               <Route path="/signup" component={Signup} />
               <Route path="/signup" component={Signup} />
-              <PrivateRoute path="/dashboard" component={UserProfile} />
+              <PrivateRoute path="/dashboard" component={MyProfile} />
               <Route component={Error} />
 
             </Switch>

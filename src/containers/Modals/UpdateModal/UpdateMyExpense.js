@@ -1,11 +1,11 @@
 import Modal from 'react-bootstrap/Modal'
 import React, { useState } from 'react'
-import { updateMyExpense } from '../actions/my_expense'
+import { updateMyExpense } from '../../../actions/my_expense'
 import { Button, TextField, Select } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux'
-import edit_icon from '../public/edit_icon.png'
+import edit_icon from '../../../public/assets/edit_icon.png'
 
-export function UpdateModal(props) {
+export function UpdateMyExpense(props) {
     const [show, setShow] = useState(false);
     console.log("props?"+JSON.stringify(props))
 
@@ -70,9 +70,10 @@ export function UpdateModal(props) {
                 <Modal.Body>
                     <form onSubmit={handleSubmit.bind(this)}>
                         <div className="form-group">
-                            <Select fullWidth={true} id="standard-basic" label="Month"  onChange={handleChange.bind(this)} >
-                            {months.map(month => (<option value={month}>{month}</option>))}
-                            </Select>
+                            
+                            <Select fullWidth={true} id="standard-basic" label="Month"  name="month" onChange={handleChange.bind(this)} >
+                                {months.map(month => (<option value={month}>{month}</option>))}
+                            </Select>  
                         </div>
                         <div className="form-group">
                             <TextField color='primary'  value={amount_send}required={true} fullWidth={true} id="standard-basic" label="Amount Sent" type="number" name="amount_send" onChange={handleChange.bind(this)} />

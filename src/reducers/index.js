@@ -1,9 +1,9 @@
 import { combineReducers} from 'redux'
-import authentication_reducer from './authentication_reducer'
+import authentication from './authentication'
 import my_expense from './my_expense'
 
 export default combineReducers({
-    authentication_reducer,
+    authentication,
     my_expense
 });
 

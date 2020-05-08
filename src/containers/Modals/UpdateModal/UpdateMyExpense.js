@@ -7,51 +7,32 @@ import edit_icon from '../../../public/assets/edit_icon.png'
 
 export function UpdateMyExpense(props) {
     const [show, setShow] = useState(false);
-    console.log("props?" + JSON.stringify(props))
+    const dispatch = useDispatch()
+    const [state, setState] = React.useState({
+        month: props.body.month,
+        amount_send:props.body.amount_send,
+        amount_received: props.body.amount_received,
+        sent_date: props.body.sent_date,
+        channel: props.body.channel,
+        rates: props.body.rates
+    })
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
-    const [month, setMonth] = useState(props.body.month);
-    const [amount_send, setAmountSent] = useState(props.body.amount_send);
-    const [amount_received, setAmountReceived] = useState(props.body.amount_received);
-    const [sent_date, setSentDate] = useState(props.body.sent_date);
-    const [channel, setChannel] = useState(props.body.channel);
-    const [rates, setRates] = useState(props.body.rates);
-    const dispatch = useDispatch()
-
     const handleChange = (event) => {
-        if (event.target.name === 'month') {
-            setMonth(event.target.value)
-        }
-        if (event.target.name === 'amount_send') {
-            setAmountSent(event.target.value)
-        }
-        if (event.target.name === 'amount_received') {
-            setAmountReceived(event.target.value)
-        }
-        if (event.target.name === 'sent_date') {
-            setSentDate(event.target.value)
-        }
-        if (event.target.name === 'channel') {
-            setChannel(event.target.value)
-        }
-        if (event.target.name === 'rates') {
-            setRates(event.target.value)
-        }
-
+        setState({...state,[event.target.name]: event.target.value});
     }
 
     const handleSubmit = (event) => {
 
 
         const body2 = {
-            month,
-            amount_send,
-            amount_received,
-            sent_date,
-            channel,
-            rates,
+            month:state.month,
+            amount_send:state.amount_send,
+            amount_received:state.amount_received,
+            sent_date:state.sent_date,
+            channel:state.channel,
+            rates:state.rates,
         }
         console.log(props.body.id + " " + body2.month + " " + body2.amount_send + " " + body2.amount_received + " " + body2.sent_date + " " + body2.channel + " " + body2.rates)
 
@@ -71,25 +52,25 @@ export function UpdateMyExpense(props) {
                     <form onSubmit={handleSubmit.bind(this)}>
                         <div className="form-group">
 
-                            <Select value={month} fullWidth={true} id="standard-basic" label="Month" name="month" onChange={handleChange.bind(this)} >
+                            <Select value={state.month} fullWidth={true} id="standard-basic" label="Month" name="month" onChange={handleChange.bind(this)} >
                                 {months.map(month => (<MenuItem value={month}>{month}</MenuItem>))}
                             </Select>
                         </div>
                        
                         <div className="form-group">
-                            <TextField color='primary' value={amount_send} required={true} fullWidth={true} id="standard-basic" label="Amount Sent" type="number" name="amount_send" onChange={handleChange.bind(this)} />
+                            <TextField color='primary' value={state.amount_send} required={true} fullWidth={true} id="standard-basic" label="Amount Sent" type="number" name="amount_send" onChange={handleChange.bind(this)} />
                         </div>
                         <div className="form-group">
-                            <TextField color='primary' value={amount_received} required={true} fullWidth={true} id="standard-basic" label="Amount Received" type="number" name="amount_received" onChange={handleChange.bind(this)} />
+                            <TextField color='primary' value={state.amount_received} required={true} fullWidth={true} id="standard-basic" label="Amount Received" type="number" name="amount_received" onChange={handleChange.bind(this)} />
                         </div>
                         <div className="form-group">
-                            <TextField color='primary' value={sent_date} required={true} fullWidth={true} id="standard-basic" type="date" name="sent_date" onChange={handleChange.bind(this)} />
+                            <TextField color='primary' value={state.sent_date} required={true} fullWidth={true} id="standard-basic" type="date" name="sent_date" onChange={handleChange.bind(this)} />
                         </div>
                         <div className="form-group">
-                            <TextField color='primary' value={channel} required={true} fullWidth={true} id="standard-basic" label="Channel" type="text" name="channel" onChange={handleChange.bind(this)} />
+                            <TextField color='primary' value={state.channel} required={true} fullWidth={true} id="standard-basic" label="Channel" type="text" name="channel" onChange={handleChange.bind(this)} />
                         </div>
                         <div className="form-group">
-                            <TextField color='primary' value={rates} required={true} fullWidth={true} id="standard-basic" label="Rates" type="text" name="rates" onChange={handleChange.bind(this)} />
+                            <TextField color='primary' value={state.rates} required={true} fullWidth={true} id="standard-basic" label="Rates" type="text" name="rates" onChange={handleChange.bind(this)} />
                         </div>
 
                         <Button variant="contained" type="submit" color="primary">Submit</Button>

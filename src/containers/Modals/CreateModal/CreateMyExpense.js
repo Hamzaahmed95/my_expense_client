@@ -6,50 +6,32 @@ import { useSelector, useDispatch } from 'react-redux'
 
 export function CreateMyExpense() {
     const [show, setShow] = useState(false);
+    const dispatch = useDispatch()
+    const [state, setState] = React.useState({
+        month: "January",
+        amount_send: 0.00,
+        amount_received: 0.00,
+        sent_date: null,
+        channel: '',
+        rates: 0.00
+    })
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
-    const [month, setMonth] = useState('January');
-    const [amount_send, setAmountSent] = useState(0.00);
-    const [amount_received, setAmountReceived] = useState(0.00);
-    const [sent_date, setSentDate] = useState(null);
-    const [channel, setChannel] = useState('');
-    const [rates, setRates] = useState(0.00);
-    const dispatch = useDispatch()
-
     const handleChange = (event) => {
-        if (event.target.name === 'month') {
-            setMonth(event.target.value)
-        }
-        if (event.target.name === 'amount_send') {
-            setAmountSent(event.target.value)
-        }
-        if (event.target.name === 'amount_received') {
-            setAmountReceived(event.target.value)
-        }
-        if (event.target.name === 'sent_date') {
-            setSentDate(event.target.value)
-        }
-        if (event.target.name === 'channel') {
-            setChannel(event.target.value)
-        }
-        if (event.target.name === 'rates') {
-            setRates(event.target.value)
-        }
-
+        setState({...state,[event.target.name]: event.target.value});
     }
 
     const handleSubmit = (event) => {
 
 
         const body = {
-            month,
-            amount_send,
-            amount_received,
-            sent_date,
-            channel,
-            rates,
+            month:state.month,
+            amount_send:state.amount_send,
+            amount_received:state.amount_received,
+            sent_date:state.sent_date,
+            channel:state.channel,
+            rates:state.rates,
         }
         console.log(body.month + " " + body.amount_send + " " + body.amount_received + " " + body.sent_date + " " + body.channel + " " + body.rates)
 
@@ -68,16 +50,8 @@ export function CreateMyExpense() {
                 <Modal.Body>
                     <form onSubmit={handleSubmit.bind(this)}>
                         <div className="form-group">
-                            {/* <Select
-                                name="month" 
-                                fullWidth={true}
-                                options={months}
-                                value={month}
-                                onChange={handleChange.bind(this)}
-                                defaultValue={'Choose Month'}
-                            /> */}
-                        
-                            <Select fullWidth={true} value={month} id="standard-basic" label="Month" name="month" onChange={handleChange.bind(this)} >
+
+                            <Select fullWidth={true} value={state.month} id="standard-basic" label="Month" name="month" onChange={handleChange.bind(this)} >
                                 {months.map(month => (<MenuItem value={month}>{month}</MenuItem>))}
                             </Select>
                         </div>

@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { updateMyExpense } from '../../../actions/my_expense'
 import { Button, TextField, Select, MenuItem } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux'
+import {months_constants} from '../../../utils/constants'
 import edit_icon from '../../../public/assets/edit_icon.png'
 
 export function UpdateMyExpense(props) {
@@ -40,7 +41,7 @@ export function UpdateMyExpense(props) {
         setShow(false)
         event.preventDefault();
     }
-    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+   
     return (
         <>
             <img src={edit_icon} onClick={handleShow} width={15} height={17} />
@@ -53,7 +54,7 @@ export function UpdateMyExpense(props) {
                         <div className="form-group">
 
                             <Select value={state.month} fullWidth={true} id="standard-basic" label="Month" name="month" onChange={handleChange.bind(this)} >
-                                {months.map(month => (<MenuItem value={month}>{month}</MenuItem>))}
+                                {months_constants.map(month => (<MenuItem value={month}>{month}</MenuItem>))}
                             </Select>
                         </div>
                        

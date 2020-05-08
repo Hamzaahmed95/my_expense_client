@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { createMyExpense } from '../../../actions/my_expense.js'
 import { Button, TextField, Select, MenuItem } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux'
+import {months_constants} from '../../../utils/constants'
 
 export function CreateMyExpense() {
     const [show, setShow] = useState(false);
@@ -24,7 +25,6 @@ export function CreateMyExpense() {
 
     const handleSubmit = (event) => {
 
-
         const body = {
             month:state.month,
             amount_send:state.amount_send,
@@ -39,8 +39,7 @@ export function CreateMyExpense() {
         setShow(false)
         event.preventDefault();
     }
-    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-    return (
+   return (
         <>
             <button variant="primary" onClick={handleShow} className="MyExpenseAddButton btn btn-outline-primary my-2 my-sm-0" type="submit">Add</button>
             <Modal show={show} onHide={handleClose}>
@@ -52,7 +51,7 @@ export function CreateMyExpense() {
                         <div className="form-group">
 
                             <Select fullWidth={true} value={state.month} id="standard-basic" label="Month" name="month" onChange={handleChange.bind(this)} >
-                                {months.map(month => (<MenuItem value={month}>{month}</MenuItem>))}
+                                {months_constants.map(month => (<MenuItem value={month}>{month}</MenuItem>))}
                             </Select>
                         </div>
 

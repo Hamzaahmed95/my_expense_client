@@ -1,43 +1,40 @@
 import React, { Component, Fragment } from 'react';
 import { readMyExpense, updateMyExpense, deleteMyExpense } from '../../actions/my_expense'
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
+import { filterData } from '../../utils/constants'
 import './MyExpense.css'
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import { CreateMyExpense } from '../../containers/Modals/CreateModal/CreateMyExpense.js'
 import { UpdateMyExpense } from '../../containers/Modals/UpdateModal/UpdateMyExpense.js'
 import delete_icon from '../../public/assets/delete_icon.png'
-
-
 class MyExpense extends Component {
+
 
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this)
     }
 
-    static propTypes = {
-        myexpense: PropTypes.array.isRequired,
-    }
 
-    componentDidMount() {
-        this.props.readMyExpense()
-    }
     handleChange(e) {
-        console.log(this.refs.month)
-
+        //this.props.searchMyExpense(this.props.myexpense, e.target.value)
     }
-
+    componentDidMount() {
+        this.props.readMyExpense()  
+    }
+  
 
     render() {
-       
+        console.log("MyExpense: " + JSON.stringify(this.props.myexpense))
+
         return (
             <Fragment>
 
                 <div className="MyExpense">
 
                     <div className="row myRow">
-                        <div className="col-md-10 "> <h3 className="MyExpenseHeading">My Expense </h3></div>
+                        <div className="col-md-8 "> <h3 className="MyExpenseHeading">My Expense </h3></div>
+                        <div className="col-md-2"> <input className="form-control mr-sm-2" onChange={(e) => this.handleChange(e)} type="search" placeholder="Search" aria-label="Search" /></div>
                         <div className="col-md-2"> <CreateMyExpense /></div>
                     </div>
                     <TableContainer component={Paper}>
@@ -58,6 +55,7 @@ class MyExpense extends Component {
                             <TableBody>
 
                                 {this.props.myexpense.map(myexpense => (
+
                                     <TableRow key={myexpense.id}>
                                         <TableCell className="cell" component="th" scope="row">
                                             {myexpense.id}
@@ -69,7 +67,7 @@ class MyExpense extends Component {
                                         <TableCell className="cell" align="left">{myexpense.channel}</TableCell>
                                         <TableCell className="cell" align="left">{myexpense.rates}</TableCell>
                                         <TableCell className="cell" align="center">
-                                         <UpdateMyExpense body ={myexpense}/>
+                                            <UpdateMyExpense body={myexpense} />
                                         </TableCell>
                                         <TableCell className="cell" align="center">
                                             <img onClick={this.props.deleteMyExpense.bind(this, myexpense.id)} src={delete_icon} width={15} height={17} />
@@ -93,5 +91,5 @@ const mapStateToProps = state => ({
     status: state.my_expense.status
 })
 
-export default connect(mapStateToProps, { readMyExpense, updateMyExpense, deleteMyExpense })(MyExpense);
+export default connect(mapStateToProps, {readMyExpense, updateMyExpense, deleteMyExpense })(MyExpense);
 
